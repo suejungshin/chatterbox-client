@@ -33,7 +33,7 @@ var App = {
           Rooms[obj.roomname].push(obj);
         }
       });
-
+      $('.username').on('click', Friends.toggleStatus);
       callback();
     });
 

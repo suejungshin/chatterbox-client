@@ -95,3 +95,7 @@ form input[type=text] {
 #add-room-textfield {
     width: 160px;
 }
+
+.username:hover {
+    cursor: pointer;
+}
