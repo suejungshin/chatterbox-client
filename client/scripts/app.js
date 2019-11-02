@@ -6,6 +6,7 @@ var App = {
 
   initialize: function() {
     App.username = window.location.search.substr(10);
+    //debugger;
 
     FormView.initialize();
     RoomsView.initialize();
@@ -18,9 +19,12 @@ var App = {
   },
 
   fetch: function(callback = ()=>{}) {
+    console.log(Parse);
     Parse.readAll((data) => {
       // examine the response from the server request:
       console.log(data);
+      Messages.results = data.results;
+      console.log('Messages data', Messages.results);
 
       callback();
     });

@@ -6,7 +6,12 @@ var RoomsView = {
   initialize: function() {
   },
 
-  render: function() {
+  renderRoom: function(room) {
+    let roomFunc = _.template(`
+      <div class="chatroom"><%= room %></div>
+    `);
+    RoomsView.$select.append(roomFunc({room: room}));
+    //$select.append(xxxx);
   }
 
 };
