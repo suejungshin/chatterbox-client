@@ -4,7 +4,7 @@ var MessagesView = {
 
   initialize: function () {
     //console.log('Messages obj', Messages.results);
-
+    $('#chats').on('click', '.username', Friends.toggleStatus);
   },
 
   renderMessage: function (message) {

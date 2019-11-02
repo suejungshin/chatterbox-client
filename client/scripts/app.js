@@ -4,7 +4,7 @@ var App = {
 
   username: 'anonymous',
 
-  initialize: function() {
+  initialize: function () {
     App.username = window.location.search.substr(10);
     //debugger;
     MessagesView.initialize();
@@ -14,16 +14,21 @@ var App = {
     // Fetch initial batch of messages
     App.startSpinner();
     App.fetch(App.stopSpinner);
+
+
+    setInterval(App.fetch, 3000);
+
   },
 
-  fetch: function(callback = ()=>{}) {
+  fetch: function (callback = () => { }) {
     console.log(Parse);
     Parse.readAll((data) => {
       // examine the response from the server request:
+      $('#chats').empty();
       console.log(data);
       Messages.results = data.results;
       Messages.results.forEach(obj => {
-        if (obj.hasOwnProperty('username') && obj.hasOwnProperty('roomname') && obj.hasOwnProperty('text') ) {
+        if (obj.hasOwnProperty('username') && obj.hasOwnProperty('roomname') && obj.hasOwnProperty('text')) {
           MessagesView.renderMessage(obj);
         }
         if (!Rooms.hasOwnProperty(obj.roomname)) {
@@ -33,18 +38,17 @@ var App = {
           Rooms[obj.roomname].push(obj);
         }
       });
-      $('.username').on('click', Friends.toggleStatus);
       callback();
     });
 
   },
 
-  startSpinner: function() {
+  startSpinner: function () {
     App.$spinner.show();
     FormView.setStatus(true);
   },
 
-  stopSpinner: function() {
+  stopSpinner: function () {
     App.$spinner.fadeOut('fast');
     FormView.setStatus(false);
   }
