@@ -5,6 +5,7 @@ var RoomsView = {
 
   initialize: function () {
     RoomsView.$button.on('click', Rooms.add);
+    RoomsView.$select.change(RoomsView.roomSelectionHandler);
   },
 
   renderRoom: function (room) {
@@ -17,6 +18,18 @@ var RoomsView = {
     // make template to access the sel
 
   },
+
+  roomSelectionHandler: function() {
+    let roomName = $('#rooms').find(':selected').text();
+    let messageDivs = document.querySelectorAll('.chat');
+    messageDivs.forEach(div => {
+      if (div.className.includes(roomName)) {
+        $(div).show();
+      } else {
+        $(div).hide();
+      }
+    });
+  }
 
   /*handleAddRoomClick: function (event) {
     //console.log(event);
