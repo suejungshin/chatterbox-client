@@ -3,7 +3,6 @@ var Parse = {
   server: `http://parse.${window.CAMPUS}.hackreactor.com/chatterbox/classes/messages`,
 
   create: function (message, successCB, errorCB = null) {
-    message = escapeHtml(message);
     // todo: save a message to the server
     $.ajax({
       url: Parse.server,
@@ -32,13 +31,4 @@ var Parse = {
     });
   }
 
-};
-
-let escapeHtml = function (unsafe) {
-  return unsafe
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
 };

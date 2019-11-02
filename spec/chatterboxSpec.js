@@ -99,6 +99,7 @@ describe('chatterbox', function() {
     });
 
     it('should add a room when clicking add', function() {
+      //debugger;
       sinon.spy(Rooms, 'add');
       var prompt = window.prompt;
       window.prompt = sinon.stub().returns('testroom');

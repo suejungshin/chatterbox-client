@@ -3,27 +3,32 @@ var RoomsView = {
   $button: $('#rooms button'),
   $select: $('#rooms select'),
 
-  initialize: function() {
-
-    let option = '<option value="1">Mr</option>';
-    let option2 = '<option value="2">somethingelse</option>';
-    //RoomsView.$select.append(option);
-    //RoomsView.$select.append(option2);
-    console.log(option);
-    console.log($('#rooms select :selected').text());
-
+  initialize: function () {
+    RoomsView.$button.on('click', Rooms.add);
   },
 
-  renderRoom: function(room) {
+  renderRoom: function (room) {
+    console.log(room);
     let roomFunc = _.template(`
-      <div class="chatroom"><%= room %></div>
+      <option><%- room %></option>
     `);
-    RoomsView.$select.append(roomFunc({room: room}));
+    RoomsView.$select.append(roomFunc({ room: room }));
 
     // make template to access the sel
 
+  },
 
+  /*handleAddRoomClick: function (event) {
+    //console.log(event);
+    let newRoomName = $('#add-room-textfield').val();
+    if (!Rooms.hasOwnProperty(newRoomName)) {
+      Rooms[newRoomName] = [];
+      RoomsView.renderRoom(newRoomName);
+    } else {
+      alert('Roomname already exists');
+    }
 
-  }
+    $('#add-room-textfield').val('');
+  }*/
 
 };

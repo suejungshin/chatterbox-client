@@ -8,20 +8,21 @@ var FormView = {
 
   handleSubmit: function (event) {
     // Stop the browser from submitting the form
+    console.log(event);
     event.preventDefault();
     let inputText = $('#message').val();
     $('#message').val('');
-    let url = window.location.href;
-    let idx = url.indexOf('username=');
-    let username = url.slice(idx + 9);
+    let username = App.username;
+    let roomName = $('#rooms').find(':selected').text();
 
     let newMessage =
     {
       username: username,
       text: inputText,
-      roomname: 'xxxx'
+      roomname: roomName
     };
     MessagesView.renderMessage(newMessage);
+    Parse.create(newMessage);
   },
 
   setStatus: function (active) {

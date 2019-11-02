@@ -7,12 +7,9 @@ var App = {
   initialize: function() {
     App.username = window.location.search.substr(10);
     //debugger;
-
-
-
+    MessagesView.initialize();
     FormView.initialize();
     RoomsView.initialize();
-
 
     // Fetch initial batch of messages
     App.startSpinner();
@@ -25,10 +22,21 @@ var App = {
       // examine the response from the server request:
       console.log(data);
       Messages.results = data.results;
-      console.log(Messages);
-      MessagesView.initialize();
+      Messages.results.forEach(obj => {
+        if (obj.hasOwnProperty('username') && obj.hasOwnProperty('roomname') && obj.hasOwnProperty('text') ) {
+          MessagesView.renderMessage(obj);
+        }
+        if (!Rooms.hasOwnProperty(obj.roomname)) {
+          Rooms[obj.roomname] = [obj];
+          RoomsView.renderRoom(obj.roomname);
+        } else {
+          Rooms[obj.roomname].push(obj);
+        }
+      });
+
       callback();
     });
+
   },
 
   startSpinner: function() {

@@ -88,3 +88,10 @@ form input[type=text] {
     background-color: #0090da;
 }
 
+#room-form {
+    display: inline;
+}
+
+#add-room-textfield {
+    width: 160px;
+}
