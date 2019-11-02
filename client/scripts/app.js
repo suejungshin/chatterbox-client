@@ -8,14 +8,15 @@ var App = {
     App.username = window.location.search.substr(10);
     //debugger;
 
+
+
     FormView.initialize();
     RoomsView.initialize();
-    MessagesView.initialize();
+
 
     // Fetch initial batch of messages
     App.startSpinner();
     App.fetch(App.stopSpinner);
-
   },
 
   fetch: function(callback = ()=>{}) {
@@ -24,8 +25,8 @@ var App = {
       // examine the response from the server request:
       console.log(data);
       Messages.results = data.results;
-      console.log('Messages data', Messages.results);
-
+      console.log(Messages);
+      MessagesView.initialize();
       callback();
     });
   },

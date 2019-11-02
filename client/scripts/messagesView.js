@@ -3,9 +3,21 @@ var MessagesView = {
   $chats: $('#chats'),
 
   initialize: function () {
-    console.log(Messages.results);
-    //FormView.$form.on('submit', MessagesView.renderMessage();
-    console.log('i am doing something now');
+    console.log('Messages obj', Messages.results);
+    /*let obj = {
+      createdAt: null,
+      objectId: null,
+      roomname: null,
+      text: null,
+      updatedAt: null,
+      username: null
+    };*/
+    Messages.results.forEach(obj => {
+      if (obj.hasOwnProperty('username') && obj.hasOwnProperty('roomname') && obj.hasOwnProperty('text') ) {
+        MessagesView.renderMessage(obj);
+      }
+    });
+    //FormView.$form.on('submit', ));
   },
 
   renderMessage: function (message) {
@@ -27,10 +39,9 @@ var MessagesView = {
     }
     MessagesView.$chats.append(html);
 */
-    console.log(Messages.results);
+
     let newMessage = MessageView.render(message);
-    MessagesView.$chats.append(newMessage);
-    console.log(message);
+    MessagesView.$chats.prepend(newMessage);
   }
 
 };
